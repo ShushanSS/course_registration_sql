@@ -5,25 +5,26 @@ CREATE TABLE people(
     father_name VARCHAR(40),
     email VARCHAR(50),
     date_of_birth DATE NOT NULL
-    )
+    );
 
 CREATE TABLE departments(
     department_id INT AUTO_INCREMENT PRIMARY KEY,
     department_name VARCHAR(50),
     department_head INT
     
-)
+);
 
 CREATE TABLE instructors(
     instructor_id INT AUTO_INCREMENT PRIMARY KEY,
     person_id INT NOT NULL UNIQUE,
     department_id INT NOT NULL,
-    rank VARCHAR(50),
+    ranking VARCHAR(50),
     FOREIGN KEY (person_id) REFERENCES people(person_id),
     FOREIGN KEY (department_id) REFERENCES departments(department_id) 
-)
+);
+
 ALTER TABLE departments
-ADD FOREIGN KEY (department_head) REFERENCES instructors(instructor_id)
+ADD FOREIGN KEY (department_head) REFERENCES instructors(instructor_id);
 
 
 CREATE TABLE majors(
@@ -31,7 +32,7 @@ CREATE TABLE majors(
     name VARCHAR(50),
     department_id INT NOT NULL,
     FOREIGN KEY (department_id) REFERENCES departments(department_id)
-)
+);
 
 CREATE TABLE programs(
     program_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -40,7 +41,7 @@ CREATE TABLE programs(
     study_mode VARCHAR(20),
     duration_years INT,
     FOREIGN KEY (major_id) REFERENCES majors(major_id)
-)
+);
 
 CREATE TABLE students(
     student_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -49,5 +50,5 @@ CREATE TABLE students(
     enrollement_year INT,
     FOREIGN KEY (person_id) REFERENCES people(person_id),
     FOREIGN KEY (program_id) REFERENCES programs(program_id) 
-)
+);
 
